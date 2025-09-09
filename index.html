@@ -3,376 +3,582 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick count</title>
+    <title>Quick Count - Dashboard Absensi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #4f46e5;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --transition: all 0.3s ease;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
+            background-color: #f5f7fa;
+            color: #333;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
-        
-        /* Header */
+
+        /* Header Styles */
         header {
-            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
             color: white;
-            padding: 80px 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
+            padding: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Navigasi */
-        nav {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-container {
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 0 20px;
         }
-        
+
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .nav-links {
             display: flex;
-            list-style: none;
+            align-items: center;
+            gap: 15px;
         }
-        
-        .nav-links li {
-            margin-left: 30px;
+
+        .logo i {
+            font-size: 28px;
         }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .login-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
             font-weight: 500;
-            transition: var(--transition);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        
-        .nav-links a:hover {
-            color: var(--primary);
+
+        .login-btn:hover {
+            background-color: white;
+            color: #4b6cb7;
         }
-        
-        /* Bagian */
-        section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
+
+        /* Greeting Section */
+        .greeting {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             margin-bottom: 20px;
+            text-align: center;
         }
-        
-        .section-title p {
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
+
+        .greeting h2 {
+            font-size: 28px;
+            color: #4b6cb7;
+            margin-bottom: 10px;
         }
-        
-        /* Tentang */
-        .about-content {
+
+        .date-time {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
+            gap: 20px;
         }
-        
-        /* Proyek */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .project-img {
-            height: 200px;
-            background: linear-gradient(120deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-        
-        .project-info {
-            padding: 20px;
-        }
-        
-        /* Kontak */
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            margin-top: 20px;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            margin: 20px 0;
-        }
-        
-        .social-links li {
-            margin: 0 15px;
-        }
-        
-        .social-links a {
-            color: white;
-            font-size: 1.5rem;
-            transition: var(--transition);
-        }
-        
-        .social-links a:hover {
-            color: var(--primary);
-        }
-        
-        /* Responsif */
+
         @media (max-width: 768px) {
-            .about-content {
+            .main-content {
                 grid-template-columns: 1fr;
             }
-            
-            .nav-container {
-                flex-direction: column;
-            }
-            
-            .nav-links {
-                margin-top: 20px;
-            }
-            
-            .nav-links li {
-                margin: 0 10px;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+        }
+
+        /* Form Section */
+        .form-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-section h3 {
+            color: #4b6cb7;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            border-color: #4b6cb7;
+            outline: none;
+        }
+
+        .attendance-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        .input-box {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .input-box label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .input-box input {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .sakit { color: #ff9800; }
+        .ijin { color: #2196f3; }
+        .alpa { color: #f44336; }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Recap Section */
+        .recap-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .recap-section h3 {
+            color: #4b6cb7;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .show-btn {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .show-btn:hover {
+            opacity: 0.9;
+        }
+
+        .recap-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .recap-table th, .recap-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .recap-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .recap-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .total-row {
+            font-weight: 600;
+            background-color: #f0f7ff;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container nav-container">
-            <div class="logo">Portofolio</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Tentang</a></li>
-                <li><a href="#projects">Proyek</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <header id="home">
-        <div class="container hero">
-            <h1>Halo, Selamat Pagi</h1>
-            <p>Ini adalah aplikasi Quick Count.</p>
-            <a href="#projects" class="btn">Lihat Proyek Saya</a>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-bar"></i>
+                    <h1>Quick Count</h1>
+                </div>
+                <button class="login-btn" id="loginBtn">Masuk</button>
+            </div>
         </div>
     </header>
 
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>Tentang Saya</h2>
-                <p>Ini adalah cerita singkat tentang perjalanan saya belajar pemrograman web.</p>
-            </div>
-            <div class="about-content">
-                <div>
-                    <h3>Pemula yang Bersemangat</h3>
-                    <p>Saya mulai belajar coding 3 bulan yang lalu dan sudah jatuh cinta dengan dunia web development. Saya menghabiskan waktu setiap hari untuk mempelajari HTML, CSS, dan JavaScript.</p>
-                    <p>Meskipun masih pemula, saya sangat antusias untuk terus belajar dan mengembangkan skill saya dalam membuat website yang modern dan responsif.</p>
-                </div>
-                <div>
-                    <h3>Skill Saya</h3>
-                    <ul>
-                        <li>HTML - Pemula hingga Menengah</li>
-                        <li>CSS - Pemula hingga Menengah</li>
-                        <li>JavaScript - Pemula</li>
-                        <li>Git & GitHub - Pemula</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="container">
+        <section class="greeting fade-in">
+            <h2 id="greetingText">Selamat Pagi!</h2>
+            <div class="date-time" id="dateTime">Senin, 1 Januari 2023 - 00:00:00</div>
+        </section>
 
-    <section id="projects" style="background-color: #f1f5f9;">
-        <div class="container">
-            <div class="section-title">
-                <h2>Proyek Saya</h2>
-                <p>Beberapa proyek yang telah saya buat selama belajar coding.</p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-calendar"></i>
+        <div class="main-content">
+            <section class="form-section fade-in">
+                <h3><i class="fas fa-pen-to-square"></i> Input Data Absensi</h3>
+                <div class="form-group">
+                    <label for="date">Tanggal</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="class">Kelas</label>
+                    <select id="class">
+                        <option value="">Pilih Kelas</option>
+                        <option value="10-ipa-1">10 IPA 1</option>
+                        <option value="10-ipa-2">10 IPA 2</option>
+                        <option value="10-ips-1">10 IPS 1</option>
+                        <option value="10-ips-2">10 IPS 2</option>
+                        <option value="11-ipa-1">11 IPA 1</option>
+                        <option value="11-ipa-2">11 IPA 2</option>
+                        <option value="11-ips-1">11 IPS 1</option>
+                        <option value="11-ips-2">11 IPS 2</option>
+                        <option value="12-ipa-1">12 IPA 1</option>
+                        <option value="12-ipa-2">12 IPA 2</option>
+                        <option value="12-ips-1">12 IPS 1</option>
+                        <option value="12-ips-2">12 IPS 2</option>
+                    </select>
+                </div>
+                <div class="attendance-inputs">
+                    <div class="input-box">
+                        <label class="sakit">Sakit</label>
+                        <input type="number" id="sakit" min="0" value="0">
                     </div>
-                    <div class="project-info">
-                        <h3>Aplikasi Kalender</h3>
-                        <p>Kalender interaktif dengan JavaScript untuk mencatat jadwal sehari-hari.</p>
+                    <div class="input-box">
+                        <label class="ijin">Ijin</label>
+                        <input type="number" id="ijin" min="0" value="0">
+                    </div>
+                    <div class="input-box">
+                        <label class="alpa">Alpa</label>
+                        <input type="number" id="alpa" min="0" value="0">
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Kalkulator</h3>
-                        <p>Kalkulator sederhana dengan fungsi dasar menggunakan JavaScript.</p>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-weather"></i>
-                    </div>
-                    <div class="project-info">
-                        <h3>Cuaca</h3>
-                        <p>Aplikasi prakiraan cuaca menggunakan API eksternal (dalam pengembangan).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <button class="submit-btn" id="submitBtn">Simpan Data</button>
+            </section>
 
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Hubungi Saya</h2>
-                <p>Silakan hubungi saya jika Anda tertarik untuk berkolaborasi atau memiliki pertanyaan.</p>
-            </div>
-            <div class="contact-content">
-                <p>Email: johndoe@example.com</p>
-                <p>Telepon: +62 812 3456 7890</p>
-                <a href="mailto:johndoe@example.com" class="btn">Kirim Email</a>
-            </div>
+            <section class="recap-section fade-in">
+                <h3><i class="fas fa-table"></i> Rekap Absensi</h3>
+                <div class="filters">
+                    <div class="form-group">
+                        <label for="recapDate">Pilih Tanggal</label>
+                        <input type="date" id="recapDate">
+                    </div>
+                    <button class="show-btn" id="showRecapBtn">Tampilkan</button>
+                </div>
+                <div class="table-container">
+                    <table class="recap-table">
+                        <thead>
+                            <tr>
+                                <th>Kelas</th>
+                                <th>Sakit</th>
+                                <th>Ijin</th>
+                                <th>Alpa</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recapTableBody">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">Pilih tanggal untuk melihat rekap</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Masuk ke Dashboard</h3>
+                <button class="close-btn" id="closeLoginModal">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Masukkan username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Masukkan password">
+            </div>
+            <button class="submit-btn" id="modalLoginBtn">Masuk</button>
+        </div>
+    </div>
 
     <footer>
-        <div class="container">
-            <ul class="social-links">
-                <li><a href="#"><i class="fab fa-github"></i></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-            </ul>
-            <p>&copy; 2023 John Doe. Dibuat dengan HTML, CSS, dan JavaScript.</p>
-            <p>Hosting oleh GitHub Pages</p>
-        </div>
+        <p>&copy; 2023 Quick Count - Dashboard Absensi. All rights reserved.</p>
     </footer>
 
     <script>
-        // Smooth scrolling untuk navigasi
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Efek scroll untuk navbar
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-                nav.style.background = 'white';
+        // Update greeting based on time of day
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            const greetingText = document.getElementById('greetingText');
+            
+            if (hour < 12) {
+                greetingText.textContent = 'Selamat Pagi!';
+            } else if (hour < 15) {
+                greetingText.textContent = 'Selamat Siang!';
+            } else if (hour < 19) {
+                greetingText.textContent = 'Selamat Sore!';
             } else {
-                nav.style.boxShadow = 'none';
-                nav.style.background = 'white';
+                greetingText.textContent = 'Selamat Malam!';
+            }
+        }
+
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('id-ID', options);
+            const timeString = now.toLocaleTimeString('id-ID');
+            
+            document.getElementById('dateTime').textContent = `${dateString} - ${timeString}`;
+        }
+
+        // Set current date as default for date inputs
+        function setCurrentDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const day = now.getDate().toString().padStart(2, '0');
+            const today = `${year}-${month}-${day}`;
+            
+            document.getElementById('date').value = today;
+            document.getElementById('recapDate').value = today;
+        }
+
+        // Modal functionality
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            document.getElementById('loginModal').style.display = 'flex';
+        });
+
+        document.getElementById('closeLoginModal').addEventListener('click', function() {
+            document.getElementById('loginModal').style.display = 'none';
+        });
+
+        document.getElementById('modalLoginBtn').addEventListener('click', function() {
+            // Simple validation (in a real application, this would be more secure)
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === 'admin123') {
+                alert('Login berhasil!');
+                document.getElementById('loginModal').style.display = 'none';
+            } else {
+                alert('Username atau password salah!');
             }
         });
+
+        // Submit data
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const selectedClass = document.getElementById('class').value;
+            const date = document.getElementById('date').value;
+            const sakit = document.getElementById('sakit').value;
+            const ijin = document.getElementById('ijin').value;
+            const alpa = document.getElementById('alpa').value;
+            
+            if (!selectedClass || !date) {
+                alert('Harap pilih tanggal dan kelas!');
+                return;
+            }
+            
+            // In a real application, this would save to a database
+            // For demo purposes, we'll just show an alert
+            alert(`Data absensi untuk ${date} kelas ${selectedClass} berhasil disimpan!\nSakit: ${sakit}, Ijin: ${ijin}, Alpa: ${alpa}`);
+            
+            // Reset form
+            document.getElementById('sakit').value = '0';
+            document.getElementById('ijin').value = '0';
+            document.getElementById('alpa').value = '0';
+        });
+
+        // Show recap
+        document.getElementById('showRecapBtn').addEventListener('click', function() {
+            const recapDate = document.getElementById('recapDate').value;
+            
+            if (!recapDate) {
+                alert('Harap pilih tanggal!');
+                return;
+            }
+            
+            // In a real application, this would fetch data from a database
+            // For demo purposes, we'll generate random data
+            const classes = [
+                '10 IPA 1', '10 IPA 2', '10 IPS 1', '10 IPS 2',
+                '11 IPA 1', '11 IPA 2', '11 IPS 1', '11 IPS 2',
+                '12 IPA 1', '12 IPA 2', '12 IPS 1', '12 IPS 2'
+            ];
+            
+            let tableBody = '';
+            let totalSakit = 0;
+            let totalIjin = 0;
+            let totalAlpa = 0;
+            
+            classes.forEach(cls => {
+                const sakit = Math.floor(Math.random() * 5);
+                const ijin = Math.floor(Math.random() * 4);
+                const alpa = Math.floor(Math.random() * 3);
+                const total = sakit + ijin + alpa;
+                
+                tableBody += `
+                    <tr>
+                        <td>${cls}</td>
+                        <td>${sakit}</td>
+                        <td>${ijin}</td>
+                        <td>${alpa}</td>
+                        <td>${total}</td>
+                    </tr>
+                `;
+                
+                totalSakit += sakit;
+                totalIjin += ijin;
+                totalAlpa += alpa;
+            });
+            
+            // Add total row
+            const grandTotal = totalSakit + totalIjin + totalAlpa;
+            tableBody += `
+                <tr class="total-row">
+                    <td>Total</td>
+                    <td>${totalSakit}</td>
+                    <td>${totalIjin}</td>
+                    <td>${totalAlpa}</td>
+                    <td>${grandTotal}</td>
+                </tr>
+            `;
+            
+            document.getElementById('recapTableBody').innerHTML = tableBody;
+        });
+
+        // Initialize
+        updateGreeting();
+        setCurrentDate();
+        updateDateTime();
+        
+        // Update time every second
+        setInterval(updateDateTime, 1000);
     </script>
 </body>
 </html>
